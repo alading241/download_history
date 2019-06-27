@@ -41,6 +41,10 @@ class SaveData(object):
         lst = os.listdir(self.path)
         lst = filter(lambda x: x.isdigit(),lst)
         lst = list(map(lambda x:int(x),lst))
+        print(lst)
+        lst.sort()
+        print(lst)
+        exit()
         self.data_size_dict = {i:os.path.getsize(os.path.join(self.path,'%05d' % i)) for i in lst}
         if not lst:
             return 0

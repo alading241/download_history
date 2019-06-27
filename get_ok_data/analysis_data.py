@@ -42,8 +42,8 @@ def main():
     errsum = 0
     errnum = 0
     for path in paths:
-        lastda = None
-        for file in os.listdir(os.path.join(BASEDATA,path)):
+        filelst = os.listdir(os.path.join(BASEDATA,path))
+        for file in filelst:
             period = PERIODDICT.get(file)
             if period:
                 '先不处理 显示数据的时候进行处理'
@@ -54,9 +54,13 @@ def main():
                 errsum += num
                 if num:
                     errnum += 1
-            else:
-                file = os.path.join(BASEDATA,path,file)
-                _, lastda = analysis(file,300,lastda)
+
+        lastda = None
+        filelst = list(filter(lambda x:x.isdigit(),filelst))
+        filelst.sort(key = lambda x:int(x))
+        for file in filelst:
+            file = os.path.join(BASEDATA,path,file)
+            _, lastda = analysis(file,300,lastda)
 
     print(errsum,errnum,'|-|')
 
