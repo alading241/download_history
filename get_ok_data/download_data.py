@@ -11,7 +11,7 @@ import time
 from pprint import pprint
 import pickle
 from datetime import datetime
-from analysis_data import main as analysis
+from .analysis_data import main as analysis
 HISTORYURL = 'https://www.okex.me/v3/futures/pc/market/%s/candles?granularity=%s&size=2880'
 DATAPATH = r'F:\my\P040_exchange_api\gl\gl\save_data'
 
@@ -144,7 +144,7 @@ def main():
     # 分析数据
     analysis()
 
-    input('输入任何键进行关闭')
+    # input('输入任何键进行关闭')
 
 if __name__ == '__main__':
     main()

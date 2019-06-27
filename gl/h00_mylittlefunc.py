@@ -38,7 +38,7 @@ def runfilepath(*path):
 
 
 # 装饰器 指定程序出错运行次数
-def tryruntime(fun,times=5):
+def tryruntime(fun,times=5,sleep_time=2):
     def inner(*args,**kw):
         runtimes = 0
         while True:
@@ -47,8 +47,8 @@ def tryruntime(fun,times=5):
                 data = fun(*args,**kw)
                 return data
             except Exception as e:
-                print('出错 2秒后 重启')
-                time.sleep(2)
+                print('出错 %s秒后 重启' % sleep_time)
+                time.sleep(sleep_time)
                 if runtimes >= times:
                     raise e
     return inner

@@ -2,8 +2,6 @@ import sys
 import os
 import time
 
-all = ['SavePassword']
-
 def get_importitems(imports):
     CURRENTURL = os.path.dirname(os.path.dirname(__file__))
 
@@ -42,6 +40,7 @@ imports = [
             ('F00_myfn','h13_request'),
             ('F00_myfn','h00_mylittlefunc'),
             ('F00_myfn','h12_save_data'),
+            ('F00_myfn','h07_time_interval'),
             ]
 
 
@@ -49,4 +48,6 @@ importitems = get_importitems(imports)
 SavePassword = importitems[0].SavePassword
 request_get = importitems[1].request_get
 opt_read = importitems[2].opt_read
+tryruntime = importitems[2].tryruntime
 SaveData = importitems[3].SaveData
+Time_interval = importitems[4].Time_interval
