@@ -46,7 +46,7 @@ def get_history(name,file,T):
     data = json.loads(data)
     data = data['data']
     data = [ [date_to_timestamp(da[0])] + [ float(d) for d in da[1:]]  for da in data ]
-    return data
+    return data[:-1]
 
 def get_history_5min(name,start):
     url = HISTORYURL % (name,300) + '&start=' + start
@@ -56,7 +56,7 @@ def get_history_5min(name,start):
     data = json.loads(data)
     data = data['data']
     data = [ [date_to_timestamp(da[0])] + [ float(d) for d in da[1:]]  for da in data if date_to_timestamp(da[0]) > date_to_timestamp(start,'Z') - 300]
-    return data
+    return data[:-1]
 
 def get_currency_name():
     url = 'https://www.okex.me/api/futures/v3/instruments'

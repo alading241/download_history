@@ -1,6 +1,7 @@
 import os
 from pprint import pprint
 import pickle
+from gl.gl import tryruntime,Time_interval,SaveData
 
 CURRENTURL = os.path.dirname(__file__)
 BASEPATH = os.path.dirname(CURRENTURL)
@@ -34,6 +35,7 @@ def analysis(file,period,lastda=None):
 
 
 def main():
+    '检查数据断点处的连续性'
     paths = []
     for path in os.listdir(BASEDATA):
         if os.path.isdir(os.path.join(BASEDATA,path)):
@@ -63,6 +65,28 @@ def main():
             _, lastda = analysis(file,300,lastda)
 
     print(errsum,errnum,'|-|')
+
+
+
+def check_data_continue():
+    '检擦数据的连续型'
+    pathlst = os.listdir('gl/gl/save_data')
+
+    for T in pathlst:
+        sd = SaveData(T,merge_name='300k',merge_size=1000 * 300)
+
+        data = sd.get_all_the_index_data()
+
+        print(T,len(data),len(data)/(12 * 24),end='\r')
+
+
+        lastda = data[0]
+        for da in data[1:]:
+            if da[0] - lastda[0] != 300:
+                raise ValueError(da[0], lastda[0], da[0] - lastda[0])
+            else:
+                print('ok',end='\r')
+            lastda = da
 
 
 

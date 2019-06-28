@@ -109,6 +109,27 @@ class SaveData(object):
             data = pickle.load(f)
         return data
 
+    def get_all_the_index_data(self,isadd=True):
+        '获得所有未压缩数据'
+        lst = os.listdir(self.path)
+        lst = list(filter(lambda x: x.isdigit(),lst))
+        lst.sort(key=lambda x:int(x))
+        data = []
+
+        if isadd:
+            for l in lst:
+                data.extend(self.get_data_from_file(l))
+        else:
+            for l in lst:
+                data.append(self.get_data_from_file(l))
+        return data
+
+    def get_data_from_file(self,file):
+        filename = os.path.join(self.path,file)
+        with open(filename,'rb') as f:
+            data = pickle.load(f)
+        return data
+
     '这两个函数貌似没有用上 大于5k的合并没有进行'
     def get_merge_path(self,merge_index=0):
         merge_name = self.merge_name_lst[merge_index]
