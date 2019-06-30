@@ -13,8 +13,3 @@ download_data = tryruntime(download_data,sleep_time=60 * 20)
 a2 = Time_interval(download_data,60 * 60 * 24)
 while True:
     a2.run()
-
-
-
-
-
