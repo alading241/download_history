@@ -16,7 +16,8 @@ for T in pathlst:
     sd = SaveData(T,merge_name='300k',merge_size=1000 * 300)
 
     data = sd.get_all_the_index_data()
-
-    cl_kline(data[:6])
+    data = [ da[:6]  for da in data]
+    
+    cl_kline(data)
 
     exit()
